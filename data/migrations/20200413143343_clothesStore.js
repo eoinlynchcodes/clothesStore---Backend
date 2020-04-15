@@ -8,12 +8,12 @@ exports.up = function(knex) {
   })
   .createTable('clothesOnSale', table => {
       table.increments('id');
-      table.string('seller').references('username').inTable('users');
+      table.string('seller').references('username').inTable('users').notNullable();
       table.string('brand').notNullable();
       table.string('condition').notNullable();
       table.string('itemType').notNullable();
       table.varchar('size').notNullable();
-      table.string('description');
+      table.string('description').notNullable();
       table.string('image').notNullable();
   })
 };
