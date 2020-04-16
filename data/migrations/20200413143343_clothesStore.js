@@ -3,12 +3,16 @@ exports.up = function(knex) {
   return knex.schema
   .createTable('users', table => {
       table.increments('id').primary();
-      table.string('username', 128).unique().notNullable();
-      table.string('password', )
+      table.string('firstName').notNullable();
+      table.string('lastName').notNullable();
+      table.string('username').unique().notNullable();
+      table.string('emailAddress', 128).unique().notNullable();
+      table.string('password').notNullable();
+      table.date('dateOfBirth').notNullable();
   })
   .createTable('clothesOnSale', table => {
       table.increments('id');
-      table.string('seller').references('username').inTable('users').notNullable();
+      table.string('userID').references('id').inTable('users').notNullable();
       table.string('brand').notNullable();
       table.string('condition').notNullable();
       table.string('itemType').notNullable();

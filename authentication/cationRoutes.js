@@ -8,12 +8,16 @@ router.get('/test', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    let { username, password } = req.body;
+    let { firstName, lastName, username, emailAddress, password, dateOfBirth } = req.body;
     const hashedPassword = bcryptjs.hashSync(password, 6);
     cationHelpers.add({
+        firstName, 
+        lastName,       
         username,
-        password: hashedPassword
-    })
+        emailAddress,
+        password: hashedPassword,
+        dateOfBirth
+        })
     .then(newUser => {
         res.status(201).json(newUser);
     })
@@ -23,9 +27,9 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    let { username, password } = req.body;
+    let { emailAddress, password } = req.body;
 
-    cationHelpers.findBy({ username })
+    cationHelpers.findBy({ emailAddress })
     .first()
     .then(user => {
         if( user && bcryptjs.compareSync(password, user.password)){
