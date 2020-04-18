@@ -6,9 +6,11 @@ router.get('/test', (req, res) => {
     res.status(200).json({message: 'The test route working works!'})
 })
 
-router.post('/addItem', (req, res) => {
-
-    clothesHelperFunctions.addClothes(req.body)
+router.post('/:id/addItem', (req, res) => {
+    const id = req.params.id;
+    const clothesItem = req.body;
+    clothesItem.userID = id;
+    clothesHelperFunctions.addClothes(clothesItem)
     .then(response => {
         res.status(201).json(response);
     })
@@ -16,6 +18,5 @@ router.post('/addItem', (req, res) => {
         res.status(500).json('There is an error' + error );
     });
 });
-
 
 module.exports = router;
