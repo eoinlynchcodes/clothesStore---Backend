@@ -6,7 +6,7 @@ router.get('/test', (req, res) => {
     res.status(200).json({message: 'The test route working works!'})
 })
 
-router.post('/:id/addItem', (req, res) => {
+router.post('/addItem', (req, res) => {
     const id = req.params.id;
     const clothesItem = req.body;
     clothesItem.userID = id;
