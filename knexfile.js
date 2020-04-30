@@ -15,5 +15,4 @@ module.exports = {
       directory: './data/seeds'
     }
   },
-
 };
